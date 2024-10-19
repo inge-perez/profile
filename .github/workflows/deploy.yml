@@ -21,9 +21,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        with:
-          node-version: 18          # Especifica la versión de Node.js
-          package-manager: pnpm@6.0.0 # Especifica la versión de pnpm
 
   deploy:
     needs: build
