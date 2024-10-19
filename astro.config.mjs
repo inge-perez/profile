@@ -16,4 +16,5 @@ export default defineConfig({
     }]]
   },
   site: 'https://inge-jsperez.github.io',
+  base: 'personal',
 });
