@@ -1,7 +1,7 @@
 ---
 import { slugify } from '../utils';
 import FormattedDate from './FormattedDate.astro';
-import {Experience} from "../pages/experience/experience";
+import type { Experience } from '../pages/experience/experience';
 
 
 const { post }: Record<string, any> | { post: Experience } = Astro.props
