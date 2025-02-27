@@ -39,4 +39,18 @@ export const projects: Project[] = [
     demoLinkRel: 'nofollow noopener noreferrer',
     tags: ['wordpress', 'elementor']
   },
+  {
+    name: 'Maju Solutions',
+    description: 'Empresa soluciones digitales',
+    demoLink: 'https://majusolutions.co/',
+    demoLinkRel: 'nofollow noopener noreferrer',
+    tags: ['wordpress', 'elementor']
+  },
+  {
+    name: 'Triage',
+    description: 'Tecnología en sector salud',
+    demoLink: 'https://taller-peso-saludable.triage.com.co/',
+    demoLinkRel: 'nofollow noopener noreferrer',
+    tags: ['wordpress', 'elementor']
+  }
 ]
