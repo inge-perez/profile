@@ -47,10 +47,17 @@ export const projects: Project[] = [
     tags: ['wordpress', 'elementor']
   },
   {
-    name: 'Triage',
-    description: 'Tecnología en sector salud',
-    demoLink: 'https://taller-peso-saludable.triage.com.co/',
+    name: 'Hablar Sana',
+    description: 'Psicología Online',
+    demoLink: 'https://hablarsana.co/',
     demoLinkRel: 'nofollow noopener noreferrer',
-    tags: ['wordpress', 'elementor']
+    tags: ['wordpress', 'elementor', 'fluentbooking']
+  },
+  {
+    name: 'HR Boost Academy',
+    description: 'Escuela Online Recursos Humanos',
+    demoLink: 'https://hrboost.academy/',
+    demoLinkRel: 'nofollow noopener noreferrer',
+    tags: ['wordpress', 'elementor', 'SmartFilters']
   }
 ]
