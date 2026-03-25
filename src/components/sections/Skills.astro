@@ -1,0 +1,28 @@
+---
+import { skillCategories } from '../../data/skills';
+---
+
+<section id='skills' class='section-shell' data-section-index='04' data-section-label='Skills'>
+	<div class='section-head animate-on-scroll' data-animation='fade-up'>
+		<div>
+			<p class='eyebrow'>Capacidades técnicas</p>
+			<h2 class='section-title'>Stack que cubre desde la interfaz hasta el servidor</h2>
+		</div>
+		<p class='section-note'>Herramientas y tecnologías organizadas por capa, no por trending. Frontend, backend, CMS, entrega y operación: todo lo que necesita un producto web real.</p>
+	</div>
+	<div class='skills-ledger'>
+		{skillCategories.map((category, index) => (
+			<article class='skill-ledger-row animate-on-scroll' data-animation='fade-up' style={`transition-delay: ${index * 60}ms;`}>
+				<div class='skill-ledger-head'>
+					<span>{String(index + 1).padStart(2, '0')}</span>
+					<h3>{category.name}</h3>
+				</div>
+				<div class='skill-ledger-items'>
+					{category.items.map((item) => (
+						<span>{item}</span>
+					))}
+				</div>
+			</article>
+		))}
+	</div>
+</section>

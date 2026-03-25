@@ -1,0 +1,126 @@
+---
+import { sectionLinks } from '../data/navigation';
+---
+
+<nav class='dots-nav' aria-label='Navegacion de secciones'>
+	<div class='rail-block'>
+		<a class='rail-brand' href='#hero' aria-label='Ir al inicio'>JP</a>
+		<ul>
+			{sectionLinks.map((section, index) => (
+				<li>
+					<a
+						class='rail-link'
+						href={`#${section.id}`}
+						data-section-link={section.id}
+						data-label={section.label}
+						data-index={String(index + 1).padStart(2, '0')}
+						aria-label={section.label}
+						title={section.label}
+					>
+						<span>{String(index + 1).padStart(2, '0')}</span>
+						<em>{section.label}</em>
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+	<div class='rail-block'>
+		<div class='rail-socials' aria-label='Redes y contacto'>
+			<span class='rail-social-label'>Enlaces</span>
+			<a href='https://www.linkedin.com/in/juanseperez/' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
+			<a href='mailto:hola@majusolutions.co'>Email</a>
+			<a href='https://majusolutions.co/' target='_blank' rel='noopener noreferrer'>MAJU</a>
+		</div>
+		<button id='themeToggle' type='button' class='theme-toggle' aria-label='Cambiar tema'>
+			<span class='theme-icon-light' aria-hidden='true'>☀</span>
+			<span class='theme-icon-dark' aria-hidden='true'>☾</span>
+		</button>
+	</div>
+</nav>
+
+<nav class='mobile-nav' aria-label='Navegacion movil de secciones'>
+	<div class='mobile-nav-top'>
+		<a class='mobile-brand' href='#hero' aria-label='Ir al inicio'>JP</a>
+		<button id='mobileThemeToggle' type='button' class='theme-toggle' aria-label='Cambiar tema'>
+			<span class='theme-icon-light' aria-hidden='true'>☀</span>
+			<span class='theme-icon-dark' aria-hidden='true'>☾</span>
+		</button>
+	</div>
+	<div class='mobile-nav-bottom'>
+		<div class='mobile-nav-scroll'>
+			{sectionLinks.map((section, index) => (
+				<a
+					class='mobile-nav-link'
+					href={`#${section.id}`}
+					data-section-link={section.id}
+					data-label={section.label}
+					data-index={String(index + 1).padStart(2, '0')}
+				>
+					<span>{String(index + 1).padStart(2, '0')}</span>
+					<em>{section.label}</em>
+				</a>
+			))}
+		</div>
+	</div>
+</nav>
+
+<script is:inline>
+	const initDotsNav = () => {
+		const links = Array.from(document.querySelectorAll('[data-section-link]'));
+		if (!links.length) return;
+
+		const sections = links
+			.map((link) => {
+				const id = link.getAttribute('data-section-link');
+				return id ? document.getElementById(id) : null;
+			})
+			.filter((section) => section instanceof HTMLElement);
+
+		const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return;
+					const id = entry.target.getAttribute('id');
+					let activeMobileLink = null;
+					links.forEach((link) => {
+						if (link.getAttribute('data-section-link') === id) {
+							link.classList.add('is-active');
+							if (link.classList.contains('mobile-nav-link')) {
+								activeMobileLink = link;
+							}
+						} else {
+							link.classList.remove('is-active');
+						}
+					});
+					activeMobileLink?.scrollIntoView({
+						behavior: motionPreference.matches ? 'auto' : 'smooth',
+						inline: 'center',
+						block: 'nearest'
+					});
+				});
+			},
+			{ threshold: 0.55 }
+		);
+
+		sections.forEach((section) => observer.observe(section));
+
+		const applyThemeToggle = (toggleId) => {
+			const toggle = document.getElementById(toggleId);
+			toggle?.addEventListener('click', () => {
+				document.documentElement.classList.toggle('dark');
+				const isDark = document.documentElement.classList.contains('dark');
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			});
+		};
+
+		applyThemeToggle('themeToggle');
+		applyThemeToggle('mobileThemeToggle');
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initDotsNav, { once: true });
+	} else {
+		initDotsNav();
+	}
+</script>

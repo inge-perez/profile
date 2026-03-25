@@ -1,0 +1,79 @@
+---
+import { projectItems } from '../../data/projects';
+
+const formatIndex = (index: number) => String(index + 1).padStart(2, '0');
+
+const getHostname = (url: string) => {
+	try {
+		return new URL(url).hostname.replace('www.', '');
+	} catch {
+		return url;
+	}
+};
+
+const caseTints = ['99, 214, 183', '70, 196, 169', '129, 224, 200'];
+---
+
+<section id='projects' class='section-shell' data-section-index='06' data-section-label='Proyectos'>
+	<div class='section-head animate-on-scroll' data-animation='fade-up'>
+		<div>
+			<p class='eyebrow'>Trabajo seleccionado</p>
+			<h2 class='section-title'>Proyectos que ya están en producción</h2>
+		</div>
+		<p class='section-note'>Sitios y plataformas lanzadas para clientes reales en salud, banca, finanzas, educación y bienestar. Cada entrega con foco en rendimiento, claridad y resultado de negocio.</p>
+	</div>
+	<div class='work-showcase'>
+		<div class='work-intro animate-on-scroll' data-animation='fade-up'>
+			<span class='work-intro-label'>Selected Work</span>
+			<p>
+				Cada proyecto combina ejecución técnica, criterio visual y una entrega pensada para negocio, no solo para verse bien.
+			</p>
+		</div>
+		<div class='work-stack'>
+		{projectItems.map((project, index) => (
+			<article
+				class='work-case animate-on-scroll'
+				data-animation='fade-up'
+				style={`transition-delay: ${index * 55}ms; --case-tint: ${caseTints[index % caseTints.length]};`}
+			>
+				<a class='work-case-link' href={project.demoLink} target='_blank' rel='noopener noreferrer' aria-label={`Abrir proyecto ${project.name}`}>
+					<div class='work-case-meta'>
+						<span>{formatIndex(index)}</span>
+						<small>{getHostname(project.demoLink)}</small>
+					</div>
+					<div class='work-case-panel'>
+						<div class='work-case-copy'>
+							<p class='work-case-kicker'>Portfolio Release</p>
+							<div class='work-case-head'>
+								<h3>{project.name}</h3>
+								<span class='project-link-inline'>Ver proyecto ↗</span>
+							</div>
+							<p class='project-description'>{project.description}</p>
+							<div class='project-tech'>
+								{project.tags.map((tag) => (
+									<span>{tag}</span>
+								))}
+							</div>
+						</div>
+						<div class='work-case-visual'>
+							<div class='work-browser-bar'>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+							<img
+								class='work-case-image'
+								src={`https://image.thum.io/get/width/1200/noanimate/${project.demoLink}`}
+								alt={`Pantallazo del sitio ${project.name}`}
+								loading='lazy'
+								decoding='async'
+								referrerpolicy='no-referrer'
+							/>
+						</div>
+					</div>
+				</a>
+			</article>
+		))}
+		</div>
+	</div>
+</section>

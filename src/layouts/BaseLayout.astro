@@ -1,23 +1,23 @@
 ---
 import BaseHead from './components/BaseHead.astro';
-import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
-import { loadEnv } from 'vite';
 
-const { GTAG_MEASUREMENT_ID } = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), '');
+const GTAG_MEASUREMENT_ID = import.meta.env.GTAG_MEASUREMENT_ID;
 const { title, description, image, keywords } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='es'>
 	<head>
 		<BaseHead title={title} description={description} image={image} keywords={keywords} />
 	</head>
-	<body
-		class="bg-white dark:bg-zinc-900 dark:text-zinc-100 pt-16 sm:pt-0"
-	>
-		<Header/>
-		<div class='py-8 min-h-[calc(100vh-160px)]'>
+  <body>
+    <script is:inline>
+      const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+      const shouldUseDark = storedTheme ? storedTheme === 'dark' : true;
+      document.documentElement.classList.toggle('dark', shouldUseDark);
+    </script>
+    <div class='min-h-screen'>
 			<slot />
 		</div>
 		<Footer />
@@ -25,8 +25,8 @@ const { title, description, image, keywords } = Astro.props;
     {
       GTAG_MEASUREMENT_ID &&
       <>
-        <script type='text/partytown' async src={'https://www.googletagmanager.com/gtag/js?id=' + GTAG_MEASUREMENT_ID}></script>
-        <script type='text/partytown' define:vars={{ GTAG_MEASUREMENT_ID }}>
+        <script is:inline type='text/partytown' async src={'https://www.googletagmanager.com/gtag/js?id=' + GTAG_MEASUREMENT_ID}></script>
+        <script is:inline type='text/partytown' define:vars={{ GTAG_MEASUREMENT_ID }}>
           window.dataLayer = window.dataLayer || [];
           function gtag() {
             dataLayer.push(arguments);

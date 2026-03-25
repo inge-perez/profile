@@ -1,0 +1,32 @@
+---
+import { experienceItems } from '../../data/experience';
+---
+
+<section id='experience' class='section-shell' data-section-index='05' data-section-label='Experiencia'>
+	<div class='section-head animate-on-scroll' data-animation='fade-up'>
+		<div>
+			<p class='eyebrow'>Experiencia</p>
+			<h2 class='section-title'>Más de 14 años liderando y ejecutando</h2>
+		</div>
+		<p class='section-note'>Trayectoria real construyendo, liderando y destrabando productos digitales en banca, SaaS, retail y consultoría. De líder de desarrollo a tech lead independiente y fundador.</p>
+	</div>
+	<div class='experience-ledger'>
+		{experienceItems.map((item, index) => (
+			<article class='experience-row animate-on-scroll' data-animation='fade-right' style={`transition-delay: ${index * 65}ms;`}>
+				<div class='experience-period'>
+					<span>{String(index + 1).padStart(2, '0')}</span>
+					<strong>{item.period}</strong>
+				</div>
+				<div class='experience-main'>
+					<h3>{item.title}</h3>
+					<p class='experience-summary'>{item.description}</p>
+					<ul class='experience-tags'>
+						{item.tags.map((tag) => (
+							<li>{tag}</li>
+						))}
+					</ul>
+				</div>
+			</article>
+		))}
+	</div>
+</section>

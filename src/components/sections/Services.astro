@@ -1,0 +1,31 @@
+---
+import { serviceItems } from '../../data/services';
+---
+
+<section id='services' class='section-shell' data-section-index='03' data-section-label='Servicios'>
+	<div class='section-head animate-on-scroll' data-animation='fade-up'>
+		<div>
+			<p class='eyebrow'>Servicios</p>
+			<h2 class='section-title'>Lo que hago y cómo te puedo ayudar</h2>
+		</div>
+		<p class='section-note'>Desde desarrollo a la medida hasta consultoría técnica estratégica. Apoyo puntual o continuo para equipos y agencias que necesitan un partner técnico confiable con criterio de producto.</p>
+	</div>
+	<div class='services-ledger'>
+		{serviceItems.map((service, index) => (
+			<article class='service-ledger-row animate-on-scroll' data-animation='fade-up' style={`transition-delay: ${index * 60}ms;`}>
+				<div class='service-ledger-head'>
+					<span>{String(index + 1).padStart(2, '0')}</span>
+					<h3>{service.title}</h3>
+				</div>
+				<div class='service-ledger-main'>
+					<p class='service-ledger-description'>{service.description}</p>
+					<ul class='service-ledger-tags'>
+					{service.tags.map((tag) => (
+						<li>{tag}</li>
+					))}
+				</ul>
+				</div>
+			</article>
+		))}
+	</div>
+</section>
