@@ -43,6 +43,12 @@ export const projectItems: ProjectItem[] = [
         tags: ['WordPress', 'Elementor']
     },
     {
+        name: 'Kalender City',
+        description: 'Que hacer en tu ciudad: agenda de eventos para crear y planear tu fin de semana.',
+        demoLink: 'https://kalender.city/',
+        tags: ['React', 'Astro', 'Supabase', 'Webhooks', 'Node.js']
+    },
+    {
         name: 'MAJU Solutions',
         description: 'Empresa de soluciones digitales para marcas en crecimiento.',
         demoLink: 'https://majusolutions.co/',

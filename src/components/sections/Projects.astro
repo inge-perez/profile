@@ -11,6 +11,8 @@ const getHostname = (url: string) => {
 	}
 };
 
+const getSnapshot = (url: string) => `https://image.thum.io/get/width/1200/noanimate/${url}`;
+
 const caseTints = ['99, 214, 183', '70, 196, 169', '129, 224, 200'];
 ---
 
@@ -60,15 +62,26 @@ const caseTints = ['99, 214, 183', '70, 196, 169', '129, 224, 200'];
 								<span></span>
 								<span></span>
 								<span></span>
+								<span class='work-browser-url'>{getHostname(project.demoLink)}</span>
 							</div>
-							<img
-								class='work-case-image'
-								src={`https://image.thum.io/get/width/1200/noanimate/${project.demoLink}`}
-								alt={`Pantallazo del sitio ${project.name}`}
-								loading='lazy'
-								decoding='async'
-								referrerpolicy='no-referrer'
-							/>
+							<div class='work-case-body'>
+								<div class='work-case-preview' aria-hidden='true'>
+									<div class='work-preview-grid'></div>
+									<span class='work-preview-initial'>{project.name.charAt(0)}</span>
+									<div class='work-preview-body'>
+										<span class='work-preview-domain'>{getHostname(project.demoLink)}</span>
+									</div>
+								</div>
+								<img
+									class='work-case-image'
+									data-src={getSnapshot(project.demoLink)}
+									data-snapshot='true'
+									alt={`Captura del sitio ${project.name}`}
+									decoding='async'
+									referrerpolicy='no-referrer'
+								/>
+								<div class='work-preview-scan' aria-hidden='true'></div>
+							</div>
 						</div>
 					</div>
 				</a>
@@ -77,3 +90,27 @@ const caseTints = ['99, 214, 183', '70, 196, 169', '129, 224, 200'];
 		</div>
 	</div>
 </section>
+
+<script is:inline>
+	const initProjectSnapshots = () => {
+		document.querySelectorAll('img[data-snapshot="true"]').forEach((img) => {
+			const visual = img.closest('.work-case-visual');
+			const src = img.getAttribute('data-src');
+			if (!visual || !src) return;
+
+			// Listeners registrados ANTES de asignar src: sin race condition posible
+			img.addEventListener('load', () => visual.classList.add('is-loaded'), { once: true });
+			img.addEventListener('error', () => visual.classList.add('is-unavailable'), { once: true });
+
+			// Asignar src dispara la carga; si ya estaba cacheado, load dispara de forma síncrona
+			img.src = src;
+		});
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initProjectSnapshots, { once: true });
+	} else {
+		initProjectSnapshots();
+	}
+</script>
+
