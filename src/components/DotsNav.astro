@@ -6,30 +6,30 @@ import { sectionLinks } from '../data/navigation';
 	<div class='rail-block'>
 		<a class='rail-brand' href='#hero' aria-label='Ir al inicio'>JP</a>
 		<ul>
-			{sectionLinks.map((section, index) => (
-				<li>
-					<a
-						class='rail-link'
-						href={`#${section.id}`}
-						data-section-link={section.id}
-						data-label={section.label}
-						data-index={String(index + 1).padStart(2, '0')}
-						aria-label={section.label}
-						title={section.label}
-					>
-						<span>{String(index + 1).padStart(2, '0')}</span>
-						<em>{section.label}</em>
-					</a>
-				</li>
-			))}
+			{
+				sectionLinks.map((section, index) => (
+					<li>
+						<a
+							class='rail-link'
+							href={`#${section.id}`}
+							data-section-link={section.id}
+							data-label={section.label}
+							data-index={String(index + 1).padStart(2, '0')}
+							aria-label={section.label}
+							title={section.label}>
+							<span>{String(index + 1).padStart(2, '0')}</span>
+							<em>{section.label}</em>
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</div>
 	<div class='rail-block'>
 		<div class='rail-socials' aria-label='Redes y contacto'>
 			<span class='rail-social-label'>Enlaces</span>
 			<a href='https://www.linkedin.com/in/juanseperez/' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
-			<a href='mailto:hola@majusolutions.co'>Email</a>
-			<a href='https://majusolutions.co/' target='_blank' rel='noopener noreferrer'>MAJU</a>
+			<a href='mailto:inge.jsperez@gmail.com'>Email</a>
 		</div>
 		<button id='themeToggle' type='button' class='theme-toggle' aria-label='Cambiar tema'>
 			<span class='theme-icon-light' aria-hidden='true'>☀</span>
@@ -48,18 +48,19 @@ import { sectionLinks } from '../data/navigation';
 	</div>
 	<div class='mobile-nav-bottom'>
 		<div class='mobile-nav-scroll'>
-			{sectionLinks.map((section, index) => (
-				<a
-					class='mobile-nav-link'
-					href={`#${section.id}`}
-					data-section-link={section.id}
-					data-label={section.label}
-					data-index={String(index + 1).padStart(2, '0')}
-				>
-					<span>{String(index + 1).padStart(2, '0')}</span>
-					<em>{section.label}</em>
-				</a>
-			))}
+			{
+				sectionLinks.map((section, index) => (
+					<a
+						class='mobile-nav-link'
+						href={`#${section.id}`}
+						data-section-link={section.id}
+						data-label={section.label}
+						data-index={String(index + 1).padStart(2, '0')}>
+						<span>{String(index + 1).padStart(2, '0')}</span>
+						<em>{section.label}</em>
+					</a>
+				))
+			}
 		</div>
 	</div>
 </nav>

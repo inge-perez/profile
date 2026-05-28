@@ -49,12 +49,6 @@ export const projectItems: ProjectItem[] = [
         tags: ['React', 'Astro', 'Supabase', 'Webhooks', 'Node.js']
     },
     {
-        name: 'MAJU Solutions',
-        description: 'Empresa de soluciones digitales para marcas en crecimiento.',
-        demoLink: 'https://majusolutions.co/',
-        tags: ['Astro', 'Typescript', 'Tailwind CSS', 'Node.js', 'Hubspot API']
-    },
-    {
         name: 'Hablar Sana',
         description: 'Psicologia online.',
         demoLink: 'https://hablarsana.co/',
